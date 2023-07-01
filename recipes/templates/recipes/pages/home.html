@@ -1,23 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 {% include 'recipes/partials/header.html' %}
 
-
-
 <body>
+    {% include 'recipes/partials/cabecalho.html' %}
 
-
-    <header class="main-header-container">
-        <div class = "main-header container">
-            
-            <a class="main-logo" href="/">
-
-                <i class="fas fa-light fa-lemon main-logo-icon"></i>
-                <span class="main-logo-text"><h1>Recipes</h1></span>
-
-            </a>
-
+    <div class="search-container">
+        <div class="container">
+            <form action="" class="search-form">
+                <input type="text" class="search-input">
+                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+            </form>
         </div>
-    </header>
-    
+    </div>
     
 </body>
+
 </html>
