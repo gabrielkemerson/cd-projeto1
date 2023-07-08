@@ -120,9 +120,17 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+
+# Esta constante foi chamada com o objetivo de incluir as pastas de arquivos estáticos que não estão dentro de um APP 
+
 STATICFILES_DIRS = [
     BASE_DIR / 'global_static',
 ]
+
+
+# Esta constante é chamada para que um caminho padrão seja definido na hora de usar o comando "collectstatic" que serve basicamente para recolher todos os arquivos estáticos que estão espalhados pelo projeto
+
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
