@@ -1,0 +1,20 @@
+<html lang="pt-br">
+{% include 'recipes/partials/header.html' %}
+
+<body>
+    {% include 'recipes/partials/cabecalho.html' %}
+    {% include 'recipes/partials/search.html' %}
+    
+    <main class="content-container">
+
+        {% block content %}
+        
+        {% endblock content %}
+
+    </main>
+
+    {% include 'recipes/partials/foother.html' %}
+    
+</body>
+
+</html>
