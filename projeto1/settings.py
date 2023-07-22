@@ -120,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
+# é usado para definir a URL base para servir arquivos estáticos.
 # (Não vem por padrão)
 
 STATIC_URL = "/static/"
