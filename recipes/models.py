@@ -9,6 +9,10 @@ class Category(models.Model):
 
     name = models.CharField(max_length=65)
 
+    # Esta função serve para que o MODEL retorne seu nome ao inves do ID. Desta forma a sua identificação será bem mais facil na tela de ADMIN
+    def __str__(self):
+        return self.name
+
 
 class Recipe(models.Model): 
 
@@ -18,7 +22,7 @@ class Recipe(models.Model):
     # Cria uma coluna chamada description que também recebe um Charfield de no máximo 200 caracteres
     description = models.CharField(max_length=200)
 
-    # Basicamente é usado como identificador único como se fosse uma Primary Key
+    # O slug é uma parte de uma URL que identifica de forma descritiva e amigável um recurso específico em um site
     slug = models.SlugField()
 
     # Cria uma coluna chamada preparation_time que recebe um IntegerField, que é um objeto que recebe valores Inteiros    
