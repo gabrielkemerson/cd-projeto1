@@ -137,6 +137,11 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'static'
 
+# Na primeira linha a baixo é criada a URL para que os arquivos de midia sejam salvos em um local fora do app e na linha subsequente é criado o caminho da pasta onde os arquivos serão armazenados, isso segue o mesmo princípio do "colectstatic"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

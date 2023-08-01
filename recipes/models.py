@@ -45,11 +45,14 @@ class Recipe(models.Model):
     is_published = models.BooleanField(default=False)
 
     # Cria uma coluna que vai receber uma imagem. O parametro 'upload_to' recebe uma pasta e uma data que vai ser a data em que aquela imagem foi adicionada
-    cover = models.ImageField(upload_to='recipes/covers/%y/%m/%d')
+    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d')
 
     # Aqui é criada uma chave estrangeira, que servirá para relacionar as duas tabelas Recipe e Category. Os parametros deste elemento são (O primeiro indica de qual outra classe vem a relação, o segundo faz com que caso essa categoria seja excluida automaticamente será atribuido o valor NULL para este elemento para que não haja inconsistência nos dados, e o terceiro parâmetro permite com que essa ação seja feita)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     # Aqui é criada uma chave estrangeira para o autor da receita, com as mesmas caracteristicas do elemento anterior, porém neste caso não precisaremos criar uma classe de usuário manualmente, pois fizemos isso apartir de um import do django que já disponibiliza uma classe User pré criada para nós
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
- 
+
+    def __str__(self):
+        return self.title
+    
