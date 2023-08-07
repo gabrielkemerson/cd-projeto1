@@ -11,7 +11,9 @@ class Category(models.Model):
 
     # Esta função serve para que o MODEL retorne seu nome ao inves do ID. Desta forma a sua identificação será bem mais facil na tela de ADMIN
     def __str__(self):
-        return self.name
+        titulo = str(self.id)
+        titulo += f' - {self.name}'
+        return titulo
 
 
 class Recipe(models.Model): 
@@ -54,5 +56,8 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.title
+        title_recipe = str(self.id)
+        title_recipe += f' - {self.title}'
+
+        return title_recipe
     
