@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Sempre que um app for criado adicione ele nesta lista, para isso basta apenas colocar o nome dele
     # (Não vem por padrão)
     "recipes",
 ]
@@ -56,7 +57,8 @@ ROOT_URLCONF = "projeto1.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [   # (Não vem por padrão)
+        "DIRS": [   # Esta linha de código serve para que o Django possa buscar uma pasta de templates fora de um app
+                    # (Não vem por padrão)
                     BASE_DIR / 'base_templates',
                  ],
         "APP_DIRS": True,
