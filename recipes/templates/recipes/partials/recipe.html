@@ -35,11 +35,17 @@
             <i class="fas fa-calendar-alt"></i>
             {{ contador.created_at|date:"d/m/Y" }} às {{ contador.created_at|date:"H:i" }}
         </span>
+        
         <span class="recipe-author-item">
-            <a href="/recipes/category/cafe-da-manha/">
+            {% if is_detail_page is not True %}
+                <a href="{% url 'recipes:category' contador.category.id %}">
+                    <i class="fas fa-layer-group"></i>
+                    <span>{{ contador.category.name }}</span>
+                </a>
+            {% else %}
                 <i class="fas fa-layer-group"></i>
                 <span>{{ contador.category.name }}</span>
-            </a>
+            {% endif %}
         </span>
     </div>
 
