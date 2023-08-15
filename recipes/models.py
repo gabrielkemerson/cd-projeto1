@@ -1,4 +1,4 @@
-# LEMBRE-SE !! após qualquer alteração ou criação você deve informarpro django que essa alteração foi feita para que ele possa deixar a sua base de dados igual ao seu código. Para isso crie a migração através do comando 'python manage.py makemigrations' e em seguida realize essas migrações para o banco    de dados atravéz do comando 'python manage.py migrate'
+# LEMBRE-SE !! após qualquer alteração ou criação você deve informarpro django que essa alteração foi feita para que ele possa deixar a sua base de dados igual ao seu código. Para isso crie a migração através do comando 'python manage.py makemigrations' e em seguida realize essas migrações para o banco de dados atravéz do comando 'python manage.py migrate'
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -50,7 +50,7 @@ class Recipe(models.Model):
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d', blank=True, default='')
 
     # Aqui é criada uma chave estrangeira, que servirá para relacionar as duas tabelas Recipe e Category. Os parametros deste elemento são (O primeiro indica de qual outra classe vem a relação, o segundo faz com que caso essa categoria seja excluida automaticamente será atribuido o valor NULL para este elemento para que não haja inconsistência nos dados, e o terceiro parâmetro permite com que essa ação seja feita)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
 
     # Aqui é criada uma chave estrangeira para o autor da receita, com as mesmas caracteristicas do elemento anterior, porém neste caso não precisaremos criar uma classe de usuário manualmente, pois fizemos isso apartir de um import do django que já disponibiliza uma classe User pré criada para nós
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
