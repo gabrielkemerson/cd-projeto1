@@ -135,7 +135,7 @@ STATICFILES_DIRS = [
 ]
 
 
-# Esta constante é chamada para que um caminho padrão seja definido na hora de usar o comando "python manage.py collectstatic" que serve basicamente para recolher todos os arquivos estáticos que estão espalhados pelo projeto(Não vem por padrão)
+# Esta constante é chamada para que um caminho padrão seja definido para armazenar na pasta citada no caminho todos os arquivos que são coletados na hora de usar o comando "python manage.py collectstatic" que serve basicamente para recolher todos os arquivos estáticos que estão espalhados pelo projeto(Não vem por padrão)
 
 STATIC_ROOT = BASE_DIR / 'static'
 
