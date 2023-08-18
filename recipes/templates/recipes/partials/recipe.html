@@ -21,16 +21,20 @@
     </div>
 
     <div class="recipe-author">
+    
         <span class="recipe-author-item">
             <i class="fas fa-user"></i>
-
-            {% if contador.author.first_name %}
-                {{contador.author.first_name}} {{contador.author.last_name}}
+            {% if contador.author is not None %}
+                {% if contador.author.first_name %}
+                    {{contador.author.first_name}} {{contador.author.last_name}}
+                {% else %}
+                    {{contador.author.username}}
+                {% endif %}
             {% else %}
-                {{contador.author.username}}
+                Desconhecido    
             {% endif %}
-
         </span>
+    
 
         <span class="recipe-author-item">
             <i class="fas fa-calendar-alt"></i>
