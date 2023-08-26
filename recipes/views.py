@@ -13,7 +13,7 @@ def home(request):
 
 
 def category(request, category_id):
-    # recipes recebe todos os objetos de Recipe filtrados por(id e que estejam publicados) os objetos serão ordenados por ordem decrescente dos ID
+    # recipes recebe todos os objetos de Recipe filtrados por(que tenham o mesmo id de category, e que estejam publicados) os objetos serão ordenados por ordem decrescente dos ID
     recipes = get_list_or_404(Recipe.objects.filter(category__id=category_id, is_published=True).order_by('-id'))
 
     return render(request, 'recipes/pages/category.html', context={
