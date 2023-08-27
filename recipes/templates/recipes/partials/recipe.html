@@ -42,15 +42,18 @@
         </span>
         
         <span class="recipe-author-item">
-            {% if is_detail_page is not True and contador.category is not None%}
+
+            {% if contador.category is not None%}
                 <a href="{% url 'recipes:category' contador.category.id %}">
                     <i class="fas fa-layer-group"></i>
                     <span>{{ contador.category.name }}</span>
                 </a>
+
             {% else %}
                 <i class="fas fa-layer-group"></i>
                 <span>{{ contador.category.name }}</span>
             {% endif %}
+
         </span>
     </div>
 
@@ -85,11 +88,14 @@
     {% endif %}
 
     {% if is_detail_page is True %}
-
         <div class="preparation-steps">
-            {{ contador.preparation_steps | linebreaksbr}}
+            {% if contador.preparation_steps_is_html is True %} 
+            <!--Este safe serve para informar ao django que o conteudo html que está sendo enviado é seguro-->
+            {{ contador.preparation_steps | safe}}
+            {% else %}
+                {{ contador.preparation_steps | linebreaksbr}}
+            {% endif %}
         </div>
-        
     {% endif %}
 
 </div>
