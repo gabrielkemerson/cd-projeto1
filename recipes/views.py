@@ -6,7 +6,7 @@ from django.http import HttpResponse
 
 def home(request):
 
-    recipes = Recipe.objects.filter(is_published=True).order_by('-id')
+    recipes = get_list_or_404(Recipe.objects.filter(is_published=True).order_by('-id'))
     return render(request, 'recipes/pages/home.html', context={
         'recipes': recipes,
     })
@@ -23,7 +23,8 @@ def category(request, category_id):
 
 
 def recipe(request, id):
-    recipe = Recipe.objects.filter(pk=id, is_published=True).first()
+    # Lembre-se que os filtros não são pk recebe id, mas se pk for igual ao id, ou seja etá mais pra im if do que um recebe
+    recipe = get_object_or_404(Recipe, pk=id, is_published=True)
 
     return render(request, 'recipes/pages/recipe-view.html', context={
         'contador': recipe,
