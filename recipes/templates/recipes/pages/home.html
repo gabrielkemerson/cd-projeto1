@@ -6,7 +6,11 @@
 <div class="main-content main-content-list container">
 
     {% for contador in recipes %}
-    {% include 'recipes/partials/recipe.html' %}
+        {% include 'recipes/partials/recipe.html' %}
+    {%empty%}
+    <div class="center m-y">
+        <h1> Não temos nenhuma receita publicada 🥲</h1>
+    </div>    
     {% endfor %}
     
 </div>
