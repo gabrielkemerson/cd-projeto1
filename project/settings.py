@@ -20,12 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-3(m6mg_!^hg03tvn67j=mpz9vubc8h96e&^ejkbf!z4!4aj3@e"
+SECRET_KEY = "django-insecure-3(m6mg_!^hg03tvn67j=mpz9vubc8h96e&^ejkbf!z4!4aj3@e"  # noqa: E501
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# O comentário abaixo foi colocado provisoriamente para que o vscode não
+# sinalizasse um erro por falta de tipagem da lista
+ALLOWED_HOSTS = []  # type: ignore
 
 
 # Application definition
@@ -37,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Sempre que um app for criado adicione ele nesta lista, para isso basta apenas colocar o nome dele
+    # Sempre que um app for criado adicione ele nesta lista
+    # para isso basta apenas colocar o nome dele
     # (Não vem por padrão)
     "recipes",
 ]
@@ -57,7 +60,8 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [   # Esta linha de código serve para que o Django possa buscar uma pasta de templates fora de um app
+        "DIRS": [   # Esta linha de código serve para que o Django possa
+                    # buscar uma pasta de templates fora de um app
                     # (Não vem por padrão)
                     BASE_DIR / 'base_templates',
                  ],
@@ -92,16 +96,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa: E501
     },
 ]
 
@@ -109,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 
@@ -128,18 +132,26 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
-# Esta constante foi chamada com o objetivo de incluir as pastas de arquivos estáticos que não estão dentro de um APP(Não vem por padrão)
+# Esta constante foi chamada com o objetivo de incluir as pastas de arquivos
+# estáticos que não estão dentro de um APP(Não vem por padrão)
 
 STATICFILES_DIRS = [
     BASE_DIR / 'global_static',
 ]
 
 
-# Esta constante é chamada para que um caminho padrão seja definido para armazenar na pasta citada no caminho todos os arquivos que são coletados na hora de usar o comando "python manage.py collectstatic" que serve basicamente para recolher todos os arquivos estáticos que estão espalhados pelo project(Não vem por padrão)
+# Esta constante é chamada para que um caminho padrão seja definido para
+# armazenar na pasta citada no caminho todos os arquivos que são coletados
+# na hora de usar o comando "python manage.py collectstatic" que serve
+# basicamente para recolher todos os arquivos estáticos que estão espalhados
+# pelo project(Não vem por padrão)
 
 STATIC_ROOT = BASE_DIR / 'static'
 
-# Na primeira linha a baixo é criada a URL para que os arquivos de midia sejam salvos em um local fora do app e na linha subsequente é criado o caminho da pasta onde os arquivos serão armazenados, isso segue o mesmo princípio do "colectstatic"
+# Na primeira linha a baixo é criada a URL para que os arquivos de midia sejam
+# salvos em um local fora do app e na linha subsequente é criado o caminho da
+# pasta onde os arquivos serão armazenados, isso segue o mesmo princípio do
+# "colectstatic"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
