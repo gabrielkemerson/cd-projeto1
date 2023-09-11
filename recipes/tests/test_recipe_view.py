@@ -23,6 +23,8 @@ class RecipeViewsTest(TestCase):
         view = resolve(reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertIs(view.func, views.recipe)
 
+    # A função client simula uma requisição feita por um usuário e retorna diversas informações desta requisição como doc HTML, Template, Status code, entre muitas outras informações    # noqa
+
     def test_recipe_home_view_returns_status_code_200_OK(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertEquals(response.status_code, 200)
@@ -30,3 +32,10 @@ class RecipeViewsTest(TestCase):
     def test_recipe_home_view_loads_correct_template(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
+
+    def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
+        response = self.client.get(reverse('recipes:home'))
+        self.assertIn(
+            '<h1> Não temos nenhuma receita publicada 🥲</h1>',
+            response.content.decode('utf-8')
+        )
