@@ -56,8 +56,4 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        title_recipe = str(self.id)
-        title_recipe += f' - {self.title}'
-
-        return title_recipe
-    
+        return self.title
