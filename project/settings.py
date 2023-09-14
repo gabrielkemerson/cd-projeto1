@@ -133,7 +133,7 @@ STATIC_URL = "/static/"
 
 
 # Esta constante foi chamada com o objetivo de incluir as pastas de arquivos
-# estáticos que não estão dentro de um APP(Não vem por padrão)
+# estáticos que não estão dentro de um APP (Não vem por padrão)
 
 STATICFILES_DIRS = [
     BASE_DIR / 'global_static',
@@ -144,7 +144,7 @@ STATICFILES_DIRS = [
 # armazenar na pasta citada no caminho todos os arquivos que são coletados
 # na hora de usar o comando "python manage.py collectstatic" que serve
 # basicamente para recolher todos os arquivos estáticos que estão espalhados
-# pelo project(Não vem por padrão)
+# pelo project (Não vem por padrão)
 
 STATIC_ROOT = BASE_DIR / 'static'
 
