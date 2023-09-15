@@ -5,7 +5,7 @@ from django.urls import reverse, resolve
 from recipes import views
 # Importa os models de recipe junto com o User (lembre-se de que se o import do User for removido de models ele quebrara o teste)    # noqa
 # from recipes.models import Category, Recipe, User
-from .test_recipe_base import RecipeTestBase, Recipe
+from .test_recipe_base import RecipeTestBase
 
 # Esta é a classe que contem todos os testes deste arquivo
 class RecipeViewsTest(RecipeTestBase):    # noqa
@@ -35,8 +35,6 @@ class RecipeViewsTest(RecipeTestBase):    # noqa
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
     def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
-        self.make_recipe()
-        Recipe.objects.get(pk=1).delete()
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
             '<h1> Não temos nenhuma receita publicada 🥲</h1>',

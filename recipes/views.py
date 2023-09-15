@@ -3,9 +3,7 @@
 # o get_list e o get_ object ambos recebem uma lista ou um objeto, caso n seja encontrado nada, ele irá retornar um erro 404 para não quebrar a sua aplicação    # noqa
 
 from django.shortcuts import render, get_list_or_404, get_object_or_404
-from utils.recipes.factory import make_recipe    # noqa
 from . models import Recipe
-from django.http import HttpResponse    # noqa
 
 
 def home(request):
