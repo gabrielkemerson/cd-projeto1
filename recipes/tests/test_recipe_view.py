@@ -1,46 +1,15 @@
-# O testCase já é importado por padrão no test.py do app
-from django.test import TestCase
 # O reverse retorna a URL apartir de uma view
 # Já a função resolve serve para testar se uma URL específica está associada à visualização correta    # noqa
 from django.urls import reverse, resolve
 # Lembre-se sempre de importar as views para testa-las
 from recipes import views
 # Importa os models de recipe junto com o User (lembre-se de que se o import do User for removido de models ele quebrara o teste)    # noqa
-from recipes.models import Category, Recipe, User
+# from recipes.models import Category, Recipe, User
+from .test_recipe_base import RecipeTestBase, Recipe
 
 # Esta é a classe que contem todos os testes deste arquivo
-class RecipeViewsTest(TestCase):    # noqa
+class RecipeViewsTest(RecipeTestBase):    # noqa
     # Lembre-se de sempre de começar o nome dos seus testes com a palavra "test" e escreva o nome dos testes de maneira bem detalhada, não importa se eles vão ficar muito grandes, o importante é ser bem descritivo    # noqa
-
-    # O setUp e o tearDown São funções que são automaticamente executadas antes de qualquer um dos testes. O setUp é sempre executado antes, e o tearDown depois de cada teste, é como se antes de cada teste fosse criado um setUp, e assim que o teste acaba um tearDown é criado    # noqa
-    def setUp(self) -> None:
-        category = Category.objects.create(name='Test category')
-        author = User.objects.create_user(
-            first_name='user',
-            last_name='name',
-            username='username',
-            password='123456',
-            email='username@email.com',
-        )
-
-        recipe = Recipe.objects.create(    # noqa
-            category=category,
-            author=author,
-            title='Recipe Title',
-            description='Recipe Description',
-            slug='recipe-slug',
-            preparation_time=10,
-            preparation_time_unit='Minutos',
-            servings=5,
-            servings_unit='Porções',
-            preparation_steps='Recipe Preparation Steps',
-            preparation_steps_is_html=False,
-            is_published=True,
-        )
-        return super().setUp()
-
-    def tearDown(self) -> None:
-        return super().tearDown()
 
     def test_recipe_home_view_function_is_correct(self):
         view = resolve(reverse('recipes:home'))
@@ -66,6 +35,7 @@ class RecipeViewsTest(TestCase):    # noqa
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
     def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
+        self.make_recipe()
         Recipe.objects.get(pk=1).delete()
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
@@ -86,6 +56,7 @@ class RecipeViewsTest(TestCase):    # noqa
         self.assertEqual(response.status_code, 404)
 
     def test_recipe_home_template_loads_recipes(self):
+        self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
         content = response.content.decode('utf-8')
         response_context_recipes = response.context['recipes']
