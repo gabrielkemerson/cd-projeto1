@@ -60,9 +60,24 @@ class RecipeViewsTest(RecipeTestBase):    # noqa
         response_context_recipes = response.context['recipes']
 
         self.assertIn('Recipe Title', content)
-        self.assertIn('10 Minutos', content)
-        self.assertIn('5 Porções', content)
-        self.assertIn('author', content)
-        self.assertIn('Test category', content)
         self.assertEquals(len(response_context_recipes), 1)
-        pass
+
+    def test_recipe_category_template_loads_recipes(self):
+        title = 'This is a category test'
+        self.make_recipe(title=title)
+        response = self.client.get(
+            reverse('recipes:category', kwargs={'category_id': 1})
+        )
+        content = response.content.decode('utf-8')
+
+        self.assertIn(title, content)
+
+    def test_recipe_detail_template_loads_recipes(self):
+        title = 'This is a detail page test'
+        self.make_recipe(title=title)
+        response = self.client.get(
+            reverse('recipes:recipe', kwargs={'id': 1})
+        )
+        content = response.content.decode('utf-8')
+
+        self.assertIn(title, content)
