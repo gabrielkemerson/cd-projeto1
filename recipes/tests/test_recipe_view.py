@@ -81,3 +81,42 @@ class RecipeViewsTest(RecipeTestBase):    # noqa
         content = response.content.decode('utf-8')
 
         self.assertIn(title, content)
+
+    def test_recipe_home_template_dont_load_recipes_not_published(self):
+        self.make_recipe(is_published=False)
+
+        response = self.client.get(reverse('recipes:home'))
+
+        self.assertIn(
+            '<h1> Não temos nenhuma receita publicada 🥲</h1>',
+            response.content.decode('utf-8')
+        )
+        self.assertEquals(
+            len(response.context['recipes']), 0
+        )
+
+    def test_recipe_category_template_dont_load_recipes_not_published(self):
+        recipe = self.make_recipe(is_published=False)
+
+        response = self.client.get(
+
+            reverse(
+                'recipes:category',
+                kwargs={'category_id': recipe.category.id}
+            )
+        )
+
+        self.assertAlmostEqual(response.status_code, 404)
+
+    def test_recipe_detail_template_dont_load_recipes_not_published(self):
+        recipe = self.make_recipe(is_published=False)
+
+        response = self.client.get(
+
+            reverse(
+                'recipes:recipe',
+                kwargs={'id': recipe.id}
+            )
+        )
+
+        self.assertAlmostEqual(response.status_code, 404)
