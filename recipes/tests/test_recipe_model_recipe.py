@@ -22,3 +22,18 @@ class RecipeModelTest(RecipeTestBase):
             # que o Django valide as informações de acordo com os padrões
             # dos Models criados
             self.recipe.full_clean()
+
+    def test_recipe_fields_max_length(self):
+
+        fields = [
+            ('title', 65),
+            ('description', 200),
+            ('preparation_time_unit', 65),
+            ('servings_unit', 65),
+        ]
+
+        for field, max_length in fields:
+            setattr(self.recipe, field, 'A' * (max_length + 1))
+
+            with self.assertRaises(ValidationError):
+                self.recipe.full_clean()
