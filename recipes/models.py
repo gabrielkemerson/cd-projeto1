@@ -16,7 +16,7 @@ class Category(models.Model):
         return titulo
 
 
-class Recipe(models.Model): 
+class Recipe(models.Model):
 
     # Cria uma coluna chamada 'title' que recebe um CharField(que é o equivalente ao VarChar no SQL) que pode receber no máximo 65 caracteres # noqa
     title = models.CharField(max_length=65)

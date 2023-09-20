@@ -120,4 +120,3 @@ class RecipeViewsTest(RecipeTestBase):    # noqa
         )
 
         self.assertAlmostEqual(response.status_code, 404)
-        #Teste de comit
