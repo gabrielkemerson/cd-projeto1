@@ -1,0 +1,7 @@
+# Este é o arquivo de configurações do coverage assim como o pytest.ini
+[run]
+# Esta configuração informa ao coverage.py para rastrear informações de cobertura de branch. Cobertura de branch refere-se a quais caminhos de decisão em seu código foram executados e quais não foram. Isso é útil para determinar se todas as condições em declarações condicionais (como if, else, elif) foram testadas adequadamente.
+
+branch = True
+# Aqui são configuradas as pastas que o coverage deve ignorar ao ser executado
+omit = venv/*,**/*test*.py,manage.py,__localcode/*

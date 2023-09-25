@@ -11,9 +11,7 @@ class Category(models.Model):
 
     # Esta função serve para que o MODEL retorne seu nome ao inves do ID. Desta forma a sua identificação será bem mais facil na tela de ADMIN # noqa
     def __str__(self):
-        titulo = str(self.id)
-        titulo += f' - {self.name}'
-        return titulo
+        return self.name
 
 
 class Recipe(models.Model):
