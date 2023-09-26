@@ -53,3 +53,14 @@ class RecipeModelTest(RecipeTestBase):
     def test_recipe_is_published_is_false_by_default(self):
         recipe = self.make_recipe_no_defaults()
         self.assertFalse(recipe.is_published)
+
+    def test_recipe_string_representation(self):
+        needed = 'String Representation'
+        self.recipe.title = needed
+        self.recipe.full_clean()
+        self.recipe.save()
+        self.assertEqual(
+            str(self.recipe),
+            needed,
+            msg=f'A sua "Representação de string da sua receita" é diferente do título que foi passado para ela.{self.recipe.title} é diferente de {needed}'    # noqa
+        )
