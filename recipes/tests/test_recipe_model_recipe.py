@@ -62,5 +62,5 @@ class RecipeModelTest(RecipeTestBase):
         self.assertEqual(
             str(self.recipe),
             needed,
-            msg=f'A sua "Representação de string da sua receita" é diferente do título que foi passado para ela.{self.recipe.title} é diferente de {needed}'    # noqa
+            msg=f'A sua "Representação de string da sua receita" é diferente do título que foi passado para ela.{str(self.recipe.title)} é diferente de {needed}'    # noqa
         )
