@@ -23,7 +23,7 @@ class Recipe(models.Model):
     description = models.CharField(max_length=200)
 
     # O slug é uma parte de uma URL que identifica de forma descritiva e amigável um recurso específico em um site    # noqa
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     # Cria uma coluna chamada preparation_time que recebe um IntegerField, que é um objeto que recebe valores Inteiros    # noqa
     preparation_time = models.IntegerField()
