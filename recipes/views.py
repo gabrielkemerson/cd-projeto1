@@ -33,3 +33,7 @@ def recipe(request, id):
         'contador': recipe,
         'is_detail_page': True,
     })
+
+
+def search(request):
+    pass
