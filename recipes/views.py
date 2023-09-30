@@ -4,6 +4,7 @@
 
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from . models import Recipe
+from django.http import Http404
 
 
 def home(request):
@@ -36,4 +37,11 @@ def recipe(request, id):
 
 
 def search(request):
+    # A variável recebe o valor de "q" através da chave que éo próprio 'q', Buscando desta forma a variável receberá None caso o seu valor não exista ao invés d retornar um erro   # noqa
+    search_term = request.GET.get('q')
+    # Caso a variável não contenha nenhum valor ou seu valor seja semelhante a falso    # noqa
+    if not search_term:
+        # Ele irá retornar um status_code de 404
+        raise Http404()
+    # A página só será renderisada se a condição acima for falsa
     return render(request, 'recipes/pages/search.html')
