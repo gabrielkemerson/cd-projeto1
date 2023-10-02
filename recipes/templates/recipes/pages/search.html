@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search page</title>
-</head>
-<body>
-    <h1>Página de busca</h1>
+{% extends 'global/base.html' %}
+
+{% block title %}{{page_title}}{% endblock title %}
+
+{% block content %} 
+<div class="main-content main-content-list container">
+
+    {% for contador in recipes %}
+        {% include 'recipes/partials/recipe.html' %}
+    {%empty%}
+    <div class="center m-y">
+        <h1> Você pesquisou por {{search_term}} 🍕</h1>
+    </div>    
+    {% endfor %}
     
-</body>
-</html>
+</div>
+{% endblock content %}

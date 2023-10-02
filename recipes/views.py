@@ -37,11 +37,15 @@ def recipe(request, id):
 
 
 def search(request):
-    # A variável recebe o valor de "q" através da chave que éo próprio 'q', Buscando desta forma a variável receberá None caso o seu valor não exista ao invés d retornar um erro   # noqa
-    search_term = request.GET.get('q')
+    # A variável recebe o valor de "q" através da chave que é o próprio 'q', Buscando desta forma a variável receberá uma string vazia caso o seu valor não exista ao invés d retornar um erro   # noqa
+    # O "strip()" é uma função do próprio python que serve para remover espaços laterais de uma string  # noqa
+    search_term = request.GET.get('q', '').strip()
     # Caso a variável não contenha nenhum valor ou seu valor seja semelhante a falso    # noqa
     if not search_term:
         # Ele irá retornar um status_code de 404
         raise Http404()
     # A página só será renderisada se a condição acima for falsa
-    return render(request, 'recipes/pages/search.html')
+    return render(request, 'recipes/pages/search.html', {
+        'page_title': f'Search for {search_term}',
+        'search_term': search_term,
+    })
