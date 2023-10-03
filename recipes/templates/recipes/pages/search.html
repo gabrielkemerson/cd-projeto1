@@ -8,8 +8,9 @@
     {% for contador in recipes %}
         {% include 'recipes/partials/recipe.html' %}
     {%empty%}
+
     <div class="center m-y">
-        <h1> Você pesquisou por {{search_term}} 🍕</h1>
+        <h1> Nenhum resultado encontrado para "{{search_term}}" 🍕</h1>
     </div>    
     {% endfor %}
     
