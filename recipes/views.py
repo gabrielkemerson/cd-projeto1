@@ -47,16 +47,19 @@ def search(request):
         # Ele irá retornar um status_code de 404
         raise Http404()
 
-    receitas_filtradas = Recipe.objects.filter(
+    receitas = Recipe.objects.filter(
         # Aqui é usado esta função para que no banco de dados possa ser realizada a busca caso uma das duas condições seja verdade, ou seja um OR, ao invés de buscar somente se as duas condições forem verdadeiras, um AND que é o que o django faria por padrão caso não fosse usado nenhum recurso  # noqa
-        Q(title__icontains=search_term) |
-        Q(description__icontains=search_term),
+
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term),
+        ),
+        is_published=True
     ).order_by('-id')
 
-    print(f'Receitas filtradas: {receitas_filtradas}')
     # A página só será renderisada se a condição acima for falsa
     return render(request, 'recipes/pages/search.html', {
         'page_title': f'Search for {search_term}',
         'search_term': search_term,
-        'recipes': receitas_filtradas,
+        'recipes': receitas,
     })
