@@ -34,6 +34,7 @@ class RecipeSearchViewTest(RecipeTestBase):    # noqa
             response.content.decode('utf-8')
         )
 
+    # Não faz parte do curso
     def test_recipe_published_is_find_in_search_page(self):
         receita = self.make_recipe(is_published=True)
         url = reverse('recipes:search') + f'?q={receita.title}'
