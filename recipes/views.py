@@ -8,6 +8,7 @@ from django.http import Http404
 # Este import é para que o django consiga usar um OR em uma busca por titulo ou descrição que estejam contidos em uma receita   # noqa
 from django.db.models import Q
 from django.core.paginator import Paginator
+from utils.pagination import make_pagination_range
 
 
 def home(request):
@@ -17,15 +18,25 @@ def home(request):
     ).order_by('-id')
 
     # A variável recebe uma query string chamada 'page' caso nela não exista nada retornara o valor 1 # noqa
-    current_page = request.GET.get('page', 1)
+    try:
+        current_page = int(request.GET.get('page', 1))
+    except ValueError:
+        current_page = 1
     # A variável recebe um objeto paginator que irá retornar os objetos 'recipes' de acordo com a quantidade definida no segundo parâmetro # noqa
-    paginator = Paginator(recipes, 6)
+    paginator = Paginator(recipes, 2)
     # A variável recebe o objeto que irá retornar uma página, como no parâmetro está sendo passado o 'current_page' a página exibida será determinada pelo valor da query string nele atribuida # noqa
     page_obj = paginator.get_page(current_page)
+
+    pagination_range = make_pagination_range(
+        paginator.page_range,
+        4,
+        current_page
+    )
 
     return render(request, 'recipes/pages/home.html', context={
         # Aqui é atribuido ao valor 'recipes' o page_obj que irá retornar as páginas de acordo com a regra de paginação definida a cima # noqa
         'recipes': page_obj,
+        'pagination_range': pagination_range
     })
 
 
