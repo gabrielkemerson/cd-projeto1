@@ -8,6 +8,9 @@ from django.http import Http404
 # Este import é para que o django consiga usar um OR em uma busca por titulo ou descrição que estejam contidos em uma receita   # noqa
 from django.db.models import Q
 from utils.pagination import make_pagination
+import os
+
+PER_PAGES = os.environ.get('PER_PAGE', 3)
 
 
 def home(request):
@@ -16,7 +19,7 @@ def home(request):
         is_published=True,
     ).order_by('-id')
 
-    page_obj, pagination_range = make_pagination(request, recipes, 6)
+    page_obj, pagination_range = make_pagination(request, recipes, PER_PAGES)
 
     return render(request, 'recipes/pages/home.html', context={
         # Aqui é atribuido ao valor 'recipes' o page_obj que irá retornar as páginas de acordo com a regra de paginação definida a cima # noqa
@@ -28,7 +31,7 @@ def home(request):
 def category(request, category_id):
     # recipes recebe todos os objetos de Recipe filtrados por(que tenham o mesmo id de category, e que estejam publicados) os objetos serão ordenados por ordem decrescente dos ID    # noqa
     recipes = get_list_or_404(Recipe.objects.filter(category__id=category_id, is_published=True).order_by('-id'))    # noqa
-    page_obj, pagination_range = make_pagination(request, recipes, 3)
+    page_obj, pagination_range = make_pagination(request, recipes, PER_PAGES)
 
     return render(request, 'recipes/pages/category.html', context={
         'recipes': page_obj,
@@ -67,7 +70,7 @@ def search(request):
         is_published=True
     ).order_by('-id')
 
-    page_obj, pagination_range = make_pagination(request, receitas, 3)
+    page_obj, pagination_range = make_pagination(request, receitas, PER_PAGES)
 
     # A página só será renderisada se a condição acima for falsa
     return render(request, 'recipes/pages/search.html', {

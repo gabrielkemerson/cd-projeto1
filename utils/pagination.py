@@ -42,7 +42,7 @@ def make_pagination(request, queryset, per_page):
         current_page = int(request.GET.get('page', 1))
     except ValueError:
         current_page = 1
-    # A variável recebe um objeto paginator que irá retornar os objetos 'recipes' de acordo com a quantidade definida no segundo parâmetro # noqa
+    # A variável recebe um objeto paginator que irá retornar os objetos 'queryset' de acordo com a quantidade definida no segundo parâmetro # noqa
     paginator = Paginator(queryset, per_page)
     # A variável recebe o objeto que irá retornar uma página, como no parâmetro está sendo passado o 'current_page' a página exibida será determinada pelo valor da query string nele atribuida # noqa
     page_obj = paginator.get_page(current_page)
