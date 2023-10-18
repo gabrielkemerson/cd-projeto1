@@ -11,7 +11,7 @@ from utils.pagination import make_pagination
 import os
 
 # aqui convertemos o valor recebido da variável de ambiente(já que o padrão retornado é str) e atribuimos ele a constante PER_PAGES # noqa
-PER_PAGES = int(os.environ.get('PER_PAGE', 3))
+PER_PAGES = int(os.environ.get('PER_PAGE', 6))
 
 
 def home(request):

@@ -6,6 +6,7 @@ from recipes import views
 # Importa os models de recipe junto com o User (lembre-se de que se o import do User for removido de models ele quebrara o teste)    # noqa
 # from recipes.models import Category, Recipe, User
 from .test_recipe_base import RecipeTestBase
+from unittest.mock import patch
 
 # Esta é a classe que contem todos os testes deste arquivo
 class RecipeHomeViewTest(RecipeTestBase):    # noqa
@@ -53,3 +54,22 @@ class RecipeHomeViewTest(RecipeTestBase):    # noqa
         self.assertEquals(
             len(response.context['recipes']), 0
         )
+
+    def test_recipe_home_is_paginated(self):
+
+        for con in range(8):
+            kwargs = {
+                'author_data': {'username': f'a{con}'},
+                'slug': f's{con}'
+            }
+            self.make_recipe(**kwargs)
+
+        with patch('recipes.views.PER_PAGES', new=3):
+            response = self.client.get(reverse('recipes:home'))
+            recipes = response.context['recipes']
+            paginator = recipes.paginator
+
+            self.assertAlmostEquals(paginator.num_pages, 3)
+            self.assertAlmostEquals(len(paginator.get_page(1)), 3)
+            self.assertAlmostEquals(len(paginator.get_page(2)), 3)
+            self.assertAlmostEquals(len(paginator.get_page(3)), 2)
