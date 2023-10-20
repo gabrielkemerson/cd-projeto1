@@ -9,6 +9,7 @@ from django.http import Http404
 from django.db.models import Q
 from utils.pagination import make_pagination
 import os
+from django.contrib import messages
 
 # aqui convertemos o valor recebido da variável de ambiente(já que o padrão retornado é str) e atribuimos ele a constante PER_PAGES # noqa
 PER_PAGES = int(os.environ.get('PER_PAGE', 6))
@@ -20,6 +21,7 @@ def home(request):
         is_published=True,
     ).order_by('-id')
 
+    messages.success(request, 'Eu vi aqui que você fez uma pesquisa recente')
     page_obj, pagination_range = make_pagination(request, recipes, PER_PAGES)
 
     return render(request, 'recipes/pages/home.html', context={
