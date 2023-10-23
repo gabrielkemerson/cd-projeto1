@@ -25,7 +25,7 @@ urlpatterns = [
     path("authors/", include("authors.urls")),
 ]
 
-# Estas linhas a baixo servem para que o django reconheça as URLS das pastas static e media. Bem como o seu caminho de diretório
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+# Estas linhas a baixo servem para que o django reconheça as URLS das pastas static e media. Bem como o seu caminho de diretório # noqa
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) # noqa
 
-urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) # noqa
