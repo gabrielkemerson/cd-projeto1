@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("recipes.urls")),
+    path("authors/", include("authors.urls")),
 ]
 
 # Estas linhas a baixo servem para que o django reconheça as URLS das pastas static e media. Bem como o seu caminho de diretório

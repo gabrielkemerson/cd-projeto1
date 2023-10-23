@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # para isso basta apenas colocar o nome dele
     # (Não vem por padrão)
     "recipes",
+    "authors",
 ]
 
 MIDDLEWARE = [
