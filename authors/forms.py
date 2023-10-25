@@ -12,3 +12,22 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
+
+        help_texts = {
+            'email': 'Digite um e-mail válido'
+        }
+
+        error_messages = {
+            'username': {
+                'required': 'Este campo não pode ser vazio!'
+            }
+        }
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'placeholder': 'Primeiro nome'
+                }),
+            'password': forms.PasswordInput(attrs={
+                'placeholder': 'Senha'
+            })
+        }
