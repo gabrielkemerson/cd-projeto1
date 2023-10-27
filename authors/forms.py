@@ -107,7 +107,7 @@ class RegisterForm(forms.ModelForm):
         return data
 
     def clean_username(self):
-        data = self.cleaned_data.get('username')
+        data = self.cleaned_data.get('username').lower()
 
         if 'robertinho' in data:
 
@@ -118,3 +118,17 @@ class RegisterForm(forms.ModelForm):
             )
 
         return data
+
+    def clean(self):
+        # nesta variável é passado todos os valores dos campos das variáveis
+        # poderiam ser passados da seguinte forma cleaned_data = self.cleaned_data.get() porém a documentação do Django recomenda que façamos como descrito a baixo # noqa
+        cleaned_data = super().clean()
+
+        password = cleaned_data.get('password')
+        password2 = cleaned_data.get('password2')
+
+        if password != password2:
+
+            raise ValidationError({
+                'password': f'As senhas são divergentes "{password}"',
+                'password2': f'As senhas são divergentes "{password2}"'})

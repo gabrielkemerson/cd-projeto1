@@ -13,7 +13,7 @@
             <div class="form-content form-content-grid">
                 {% for field in form %}
                     <div class="form-grup">
-                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        <!--<label for="{{field.id_for_label}}">{{field.label}}</label>-->
                         {{field}}
 
                         {% if field.help_text %}
@@ -24,6 +24,17 @@
                     </div>
                 {% endfor %}
             </div>
+
+            {% if form.errors %}
+            <div class="form-content form-content-grid">
+                <div class="form-grup">
+                    <div class="message message-error">
+                        Erros no formulário
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
             <div class="form-content form-content-grid">
                 <div class="form-grup">
                     <button type="submit"> Enviar </button>
