@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+import re
 
 
 # Nesta função receberemos um campo, o widget que será alterado e o novo valor deste widget # noqa
@@ -13,6 +14,23 @@ def add_attr(field, attr_name, attr_new_val):
 # Neste caso não re reescrevemos um field, apenas adicionamos imformações a ele
 def add_placeholder(field, placeholder_val):
     add_attr(field, 'placeholder', placeholder_val)
+
+
+# Função para validação através de validators
+def strong_password(password):
+    # aqui será checado se existem letras de a-z minusculas, letras de A-Z maiusculas, números de 1-9 e se tem no mínimo 8 caracteres # noqa
+    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
+
+    # Se a senha não corresponder aos requisitos
+    if not regex.match(password):
+
+        raise ValidationError((
+            'Sua senha deve conter '
+            'no mínimo 8 caracteres '
+            'letras maiusculas minúsculas e números'
+        ),
+            code='invalid'
+        )
 
 
 class RegisterForm(forms.ModelForm):
@@ -54,7 +72,8 @@ class RegisterForm(forms.ModelForm):
         }),
         error_messages={
             'required': '* Obrigatório'
-        }
+        },
+        validators=[strong_password]
     )
 
     password2 = forms.CharField(
@@ -93,6 +112,7 @@ class RegisterForm(forms.ModelForm):
             })
         }
 
+    # Validação de campos independentes
     def clean_password(self):
         data = self.cleaned_data.get('password')
 
@@ -106,6 +126,7 @@ class RegisterForm(forms.ModelForm):
 
         return data
 
+    # Validação de campos independentes
     def clean_username(self):
         data = self.cleaned_data.get('username').lower()
 
@@ -119,6 +140,7 @@ class RegisterForm(forms.ModelForm):
 
         return data
 
+    # Validação de campos dependentes
     def clean(self):
         # nesta variável é passado todos os valores dos campos das variáveis
         # poderiam ser passados da seguinte forma cleaned_data = self.cleaned_data.get() porém a documentação do Django recomenda que façamos como descrito a baixo # noqa
@@ -130,5 +152,5 @@ class RegisterForm(forms.ModelForm):
         if password != password2:
 
             raise ValidationError({
-                'password': f'As senhas são divergentes "{password}"',
-                'password2': f'As senhas são divergentes "{password2}"'})
+                'password': 'As senhas são divergentes',
+                'password2': 'As senhas são divergentes'})
