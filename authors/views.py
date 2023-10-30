@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from . forms import RegisterForm
 from django.http import Http404
+from django.contrib import messages
 
 # Create your views here.
 
@@ -25,6 +26,15 @@ def register_create(request):
     # Aqui criamos uma nova chave dentro da nossa session chamada de register_form_data, e essa chave irá receber todos os dados da constante POST # noqa
     request.session['register_form_data'] = POST
     form = RegisterForm(POST)
+    # validação para salvar dados na base de dados
+    # se o formulário for válido
+    if form.is_valid():
+        # as informações do formulário serão salvas na base de dados
+        form.save()
+        # returna uma mensagem de sucesso ao salvar os dados
+        messages.success(request, 'Usuário criado com sucesso !')
+        # deleta os dados da session
+        del (request.session['register_form_data'])
 
     # Aqui á view redireciona para a view a cima "register_view" e na outra view esses dados da session serão recebidos # noqa
     return redirect('authors:register')
