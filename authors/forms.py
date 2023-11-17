@@ -42,6 +42,7 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['last_name'], 'Sobre nome')
 
     # Sub-escrições
+    # aqui estão sendo feitas a bonescrição dos campos, ou seja é como se eles estivessem sendo refeitos e reconfigurados. É aconselhado fazer esse tipo de mudança de um só jeito para evitar bugs ou confusão de placeholder por exemplo # noqa
     first_name = forms.CharField(
         required=False,
 
