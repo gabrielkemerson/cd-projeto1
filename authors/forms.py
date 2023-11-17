@@ -63,7 +63,11 @@ class RegisterForm(forms.ModelForm):
 
     email = forms.CharField(required=False, widget=forms.TextInput(attrs={
         'placeholder': 'E-mail'
-    }))
+        }),
+        help_text=(
+            'Digite um e-mail válido'
+        ),
+        )
 
     password = forms.CharField(
         required=True,
@@ -99,10 +103,6 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
-
-        help_texts = {
-            'email': 'Digite um e-mail válido'
-        }
 
         widgets = {
             'first_name': forms.TextInput(attrs={
