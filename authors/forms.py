@@ -48,7 +48,9 @@ class RegisterForm(forms.ModelForm):
 
         widget=forms.TextInput(attrs={
             'placeholder': 'Primeiro nome'
-        }))
+        }),
+        label='First name'
+    )
 
     username = forms.CharField(
         required=True,
@@ -58,7 +60,8 @@ class RegisterForm(forms.ModelForm):
         }),
         error_messages={
             'required': '* Obrigatório'
-        }
+        },
+        label='Username'
     )
 
     email = forms.CharField(required=False, widget=forms.TextInput(attrs={
@@ -67,7 +70,8 @@ class RegisterForm(forms.ModelForm):
         help_text=(
             'Digite um e-mail válido'
         ),
-        )
+        label='E-mail'
+    )
 
     password = forms.CharField(
         required=True,
@@ -78,7 +82,8 @@ class RegisterForm(forms.ModelForm):
         error_messages={
             'required': '* Obrigatório'
         },
-        validators=[strong_password]
+        validators=[strong_password],
+        label='Password'
     )
 
     password2 = forms.CharField(
@@ -90,7 +95,8 @@ class RegisterForm(forms.ModelForm):
 
         error_messages={
             'required': '*obrigatório',
-        }
+        },
+        label='Password2'
     )
 
     class Meta:
