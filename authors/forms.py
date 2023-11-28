@@ -127,20 +127,6 @@ class RegisterForm(forms.ModelForm):
 
         return data
 
-    # Validação de campos independentes
-    def clean_username(self):
-        data = self.cleaned_data.get('username').lower()
-
-        if 'robertinho' in data:
-
-            raise ValidationError(
-                'Seu nome de usuário não pode conter %(value)s',
-                code='invalid',
-                params={'value': '"Robertinho"'}
-            )
-
-        return data
-
     # Validação de campos dependentes
     def clean(self):
         # nesta variável é passado todos os valores dos campos das variáveis
