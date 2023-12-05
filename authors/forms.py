@@ -57,10 +57,6 @@ class RegisterForm(forms.ModelForm):
 
     last_name = forms.CharField(
         required=True,
-
-        widget=forms.TextInput(attrs={
-            'placeholder': 'Sobre nome'
-        }),
         error_messages={
             'required': '* Este campo não pode ser vazio'
         },
@@ -79,13 +75,13 @@ class RegisterForm(forms.ModelForm):
         label='Username'
     )
 
-    email = forms.CharField(required=False, widget=forms.TextInput(attrs={
-        'placeholder': 'E-mail'
+    email = forms.EmailField(
+        error_messages={'required': '* O campo de E-mail é obrigatório'},
+        label='E-mail',
+        help_text='Digite um e-mail válido',
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'E-mail'
         }),
-        help_text=(
-            'Digite um e-mail válido'
-        ),
-        label='E-mail'
     )
 
     password = forms.CharField(
