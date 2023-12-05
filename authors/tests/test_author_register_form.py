@@ -25,6 +25,7 @@ class AuthorRegisterFormUnitTest(TestCase):
 
     @parameterized.expand([
         ('email', 'Digite um e-mail válido'),
+        ('username', 'Obrigatório, letras, números e  @.+-_. apenas.')
     ])
     def test_fields_help_text(self, field, needed):
 

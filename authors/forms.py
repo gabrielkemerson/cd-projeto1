@@ -44,7 +44,6 @@ class RegisterForm(forms.ModelForm):
     # Sub-escrições
     # aqui estão sendo feitas a bonescrição dos campos, ou seja é como se eles estivessem sendo refeitos e reconfigurados. É aconselhado fazer esse tipo de mudança de um só jeito para evitar bugs ou confusão de placeholder por exemplo # noqa
     first_name = forms.CharField(
-        required=True,
 
         widget=forms.TextInput(attrs={
             'placeholder': 'Primeiro nome'
@@ -56,7 +55,6 @@ class RegisterForm(forms.ModelForm):
     )
 
     last_name = forms.CharField(
-        required=True,
         error_messages={
             'required': '* Este campo não pode ser vazio'
         },
@@ -64,15 +62,17 @@ class RegisterForm(forms.ModelForm):
     )
 
     username = forms.CharField(
-        required=True,
-
+        label='Username',
         widget=forms.TextInput(attrs={
             'placeholder': 'Nome de usuário'
         }),
+        help_text='Obrigatório, letras, números e  @.+-_. apenas.', # noqa
         error_messages={
-            'required': '* Este campo é obrigatório'
+            'required': '* Este campo é obrigatório',
+            'min_length': 'Username must have at least 4 characters',
+            'max_length': 'Username must have less than 150 characters',
         },
-        label='Username'
+        min_length=4, max_length=150,
     )
 
     email = forms.EmailField(
@@ -85,7 +85,6 @@ class RegisterForm(forms.ModelForm):
     )
 
     password = forms.CharField(
-        required=True,
 
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Digite sua senha'
@@ -98,7 +97,6 @@ class RegisterForm(forms.ModelForm):
     )
 
     password2 = forms.CharField(
-        required=True,
 
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Confirme sua senha'
