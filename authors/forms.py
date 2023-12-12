@@ -57,10 +57,6 @@ class RegisterForm(forms.ModelForm):
 
     last_name = forms.CharField(
         required=True,
-
-        widget=forms.TextInput(attrs={
-            'placeholder': 'Sobre nome'
-        }),
         error_messages={
             'required': '* Este campo não pode ser vazio'
         },
