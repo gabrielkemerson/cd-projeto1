@@ -25,6 +25,7 @@ class AuthorRegisterFormUnitTest(TestCase):
 
     @parameterized.expand([
         ('email', 'Digite um e-mail válido'),
+        ('username', 'Obrigatório, letras, números e  @.+-_. apenas.')
     ])
     def test_fields_help_text(self, field, needed):
 
@@ -67,6 +68,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         ('last_name', '* Este campo não pode ser vazio'),
         ('password', '* Este campo é obrigatório'),
         ('password2', '* Este campo é obrigatório'),
+        ('email', '* O campo de E-mail é obrigatório')
     ])
     def test_fields_cannot_be_empty(self, field, msg):
         url = reverse('authors:create')
