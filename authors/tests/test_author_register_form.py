@@ -97,3 +97,26 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         msg = 'Username must have less than 150 characters'
         self.assertIn(msg, response.content.decode('utf-8'))
         self.assertIn(msg, response.context['form'].errors.get('username'))
+
+    def test_password_field_have_lower_upper_case_letters_and_numbers(self):
+        url = reverse('authors:create')
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        self.form_data['password'] = 'abc123'
+        response = self.client.post(url, data=self.form_data, follow=True)
+
+        msg = (
+            'Sua senha deve conter '
+            'no mínimo 8 caracteres '
+            'letras maiusculas minúsculas e números'
+        )
+        
+        self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertIn(msg, response.context['form'].errors.get('password'))
+
+        url = reverse('authors:create')
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        self.form_data['password'] = 'AAabc123'
+        response = self.client.post(url, data=self.form_data, follow=True)
+        
+        self.assertNotIn(msg, response.content.decode('utf-8'))
+        self.assertNotIn(msg, response.context['form'].errors.get('password'))
