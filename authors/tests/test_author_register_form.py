@@ -72,8 +72,28 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
     ])
     def test_fields_cannot_be_empty(self, field, msg):
         url = reverse('authors:create')
-        # Este folow é usado pe neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
         self.form_data[field] = ''
         response = self.client.post(url, data=self.form_data, follow=True)
-        # self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertIn(msg, response.content.decode('utf-8'))
         self.assertIn(msg, response.context['form'].errors.get(field))
+
+    def test_username_field_min_length_should_be_4(self):
+        url = reverse('authors:create')
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        self.form_data['username'] = 'Noa'
+        response = self.client.post(url, data=self.form_data, follow=True)
+
+        msg = 'Username must have at least 4 characters'
+        self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertIn(msg, response.context['form'].errors.get('username'))
+
+    def test_username_field_max_length_should_be_150(self):
+        url = reverse('authors:create')
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        self.form_data['username'] = 'G' * 151
+        response = self.client.post(url, data=self.form_data, follow=True)
+
+        msg = 'Username must have less than 150 characters'
+        self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertIn(msg, response.context['form'].errors.get('username'))

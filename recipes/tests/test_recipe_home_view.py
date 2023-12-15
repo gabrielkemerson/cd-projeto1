@@ -20,7 +20,7 @@ class RecipeHomeViewTest(RecipeTestBase):    # noqa
 
     def test_recipe_home_view_returns_status_code_200_OK(self):
         response = self.client.get(reverse('recipes:home'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_recipe_home_view_loads_correct_template(self):
         response = self.client.get(reverse('recipes:home'))
@@ -40,7 +40,7 @@ class RecipeHomeViewTest(RecipeTestBase):    # noqa
         response_context_recipes = response.context['recipes']
 
         self.assertIn('Recipe Title', content)
-        self.assertEquals(len(response_context_recipes), 1)
+        self.assertEqual(len(response_context_recipes), 1)
 
     def test_recipe_home_template_dont_load_recipes_not_published(self):
         self.make_recipe(is_published=False)
@@ -51,7 +51,7 @@ class RecipeHomeViewTest(RecipeTestBase):    # noqa
             '<h1> Não temos nenhuma receita publicada 🥲</h1>',
             response.content.decode('utf-8')
         )
-        self.assertEquals(
+        self.assertEqual(
             len(response.context['recipes']), 0
         )
 
@@ -69,7 +69,7 @@ class RecipeHomeViewTest(RecipeTestBase):    # noqa
             recipes = response.context['recipes']
             paginator = recipes.paginator
 
-            self.assertAlmostEquals(paginator.num_pages, 3)
-            self.assertAlmostEquals(len(paginator.get_page(1)), 3)
-            self.assertAlmostEquals(len(paginator.get_page(2)), 3)
-            self.assertAlmostEquals(len(paginator.get_page(3)), 2)
+            self.assertAlmostEqual(paginator.num_pages, 3)
+            self.assertAlmostEqual(len(paginator.get_page(1)), 3)
+            self.assertAlmostEqual(len(paginator.get_page(2)), 3)
+            self.assertAlmostEqual(len(paginator.get_page(3)), 2)

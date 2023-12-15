@@ -55,10 +55,7 @@ class RegisterForm(forms.ModelForm):
     )
 
     last_name = forms.CharField(
-<<<<<<< HEAD
         required=True,
-=======
->>>>>>> 31dbacf413f35439a9d3bc42ff2023ed201ef9c5
         error_messages={
             'required': '* Este campo não pode ser vazio'
         },
