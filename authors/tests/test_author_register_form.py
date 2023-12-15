@@ -120,3 +120,23 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         
         self.assertNotIn(msg, response.content.decode('utf-8'))
         self.assertNotIn(msg, response.context['form'].errors.get('password'))
+
+    def test_password_and_password_confirmation_are_equal(self):
+        url = reverse('authors:create')
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        self.form_data['password'] = 'AAabc123'
+        self.form_data['password2'] = 'BBabc123'
+        response = self.client.post(url, data=self.form_data, follow=True)
+
+        msg = 'As senhas são divergentes'
+        
+        self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertIn(msg, response.context['form'].errors.get('password'))
+
+        url = reverse('authors:create')
+        # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
+        self.form_data['password'] = 'AAabc123'
+        self.form_data['password2'] = 'AAabc123'
+        response = self.client.post(url, data=self.form_data, follow=True)
+        
+        self.assertNotIn(msg, response.content.decode('utf-8'))
