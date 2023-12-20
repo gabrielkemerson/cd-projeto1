@@ -73,3 +73,33 @@ class RecipeHomeViewTest(RecipeTestBase):    # noqa
             self.assertAlmostEqual(len(paginator.get_page(1)), 3)
             self.assertAlmostEqual(len(paginator.get_page(2)), 3)
             self.assertAlmostEqual(len(paginator.get_page(3)), 2)
+
+    def test_invalid_page_query_uses_page_one(self):
+
+        for con in range(8):
+            kwargs = {
+                'author_data': {'username': f'a{con}'},
+                'slug': f's{con}'
+            }
+            self.make_recipe(**kwargs)
+
+        with patch('recipes.views.PER_PAGES', new=3):
+            response = self.client.get(reverse('recipes:home') + '?page=1A')
+
+            self.assertEqual(
+                response.context['recipes'].number,
+                1
+            )
+
+            response = self.client.get(reverse('recipes:home') + '?page=2')
+            self.assertEqual(
+                response.context['recipes'].number,
+                2
+            )
+
+            response = self.client.get(reverse('recipes:home') + '?page=3')
+            self.assertEqual(
+                response.context['recipes'].number,
+                3
+            )
+            

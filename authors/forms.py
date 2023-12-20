@@ -129,20 +129,6 @@ class RegisterForm(forms.ModelForm):
             })
         }
 
-    # Validação de campos independentes
-    def clean_password(self):
-        data = self.cleaned_data.get('password')
-
-        if 'atenção' in data:
-
-            raise ValidationError(
-                'Não digite %(value)s na sua senha!',
-                code='invalid',
-                params={'value': '"Atenção"'}
-            )
-
-        return data
-
     # Validação de campos dependentes
     def clean(self):
         # nesta variável é passado todos os valores dos campos das variáveis
