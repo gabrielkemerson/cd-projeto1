@@ -80,7 +80,7 @@ class RegisterForm(forms.ModelForm):
         error_messages={'required': '* O campo de E-mail é obrigatório'},
         label='E-mail',
         help_text='Digite um e-mail válido',
-        widget=forms.PasswordInput(attrs={
+        widget=forms.TextInput(attrs={
             'placeholder': 'E-mail'
         }),
     )
