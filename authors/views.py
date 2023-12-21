@@ -29,8 +29,11 @@ def register_create(request):
     # validação para salvar dados na base de dados
     # se o formulário for válido
     if form.is_valid():
-        # as informações do formulário serão salvas na base de dados
-        form.save()
+        # as informações do formulário serão salvas na base de dados (se tiver sem o commit=False)
+        user = form.save(commit=False)
+        # Aqui está sendo configurado o campo de senha para ser criptografado e salvo na base de dados
+        user.set_password(user.password)
+        user.save()
         # returna uma mensagem de sucesso ao salvar os dados
         messages.success(request, 'Usuário criado com sucesso !')
         # deleta os dados da session
