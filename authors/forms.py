@@ -129,6 +129,21 @@ class RegisterForm(forms.ModelForm):
             })
         }
 
+    # Validação de campos independentes
+    # Quando você usa um clean_nomedocampo ele é automaticamente lincado ao campoexistente sem que você precise fazer nenhum outro prossedimento para isso # noqa
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '')
+        exists = User.objects.filter(email=email).exists()
+
+        if exists:
+            # Não precisamos especificar a qual campo o erro será atribuido, porque essa atribuição é feita no nome da função já que é um tratamento de campo independente # noqa
+            raise ValidationError(
+                'Este e-mail já está em uso',
+                code='invalid',
+            )
+        # Lembre-se de retornar o campo para que os erros do mesmo sejam exibidos nos testes # noqa
+        return email
+    
     # Validação de campos dependentes
     def clean(self):
         # nesta variável é passado todos os valores dos campos das variáveis
@@ -139,7 +154,7 @@ class RegisterForm(forms.ModelForm):
         password2 = cleaned_data.get('password2')
 
         if password != password2:
-
+            # Aqui precisamos especificar em qual campo será exibido o erro porque a atribuição do tratamento não é feita no nome da função # noqa
             raise ValidationError({
                 'password': 'As senhas são divergentes',
                 'password2': 'As senhas são divergentes'})
