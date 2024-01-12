@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <head>
 <html lang="pt-br">
-{% include 'recipes/partials/header.html' %}
+{% include 'global/partials/header.html' %}
 
 <title>{% block title %}{% endblock title %} | Recipe</title>
 </head>
 
 <body>
-    {% include 'recipes/partials/cabecalho.html' %}
-    {% include 'recipes/partials/search.html' %}
+    {% include 'global/partials/cabecalho.html' %}
+    {% include 'global/partials/search.html' %}
     
     <main class="content-container">
         {% block content %}
         
         {% endblock content %}
-        {% include 'recipes/partials/pagination.html' %} 
+        {% include 'global/partials/pagination.html' %} 
        
     </main>
 
-    {% include 'recipes/partials/foother.html' %} 
+    {% include 'global/partials/foother.html' %} 
 </body>
 
 </html>
