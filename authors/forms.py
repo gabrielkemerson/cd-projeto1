@@ -93,6 +93,7 @@ class RegisterForm(forms.ModelForm):
         error_messages={
             'required': '* Este campo é obrigatório'
         },
+        help_text='No mínimo 8 caracteres, Letras maiusculas minusculas e números.',
         validators=[strong_password],
         label='Password'
     )

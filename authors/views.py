@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . forms import RegisterForm
 from django.http import Http404
 from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 
@@ -14,6 +15,7 @@ def register_view(request):
     # Retorna o template de registro e as informações salvas na session no contexto # noqa
     return render(request, 'authors/pages/register_view.html', {
         'form': form,
+        'form_action': reverse('authors:create'),
     })
 
 
