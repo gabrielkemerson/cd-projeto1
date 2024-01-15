@@ -1,36 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-import re
-
-
-# Nesta função receberemos um campo, o widget que será alterado e o novo valor deste widget # noqa
-def add_attr(field, attr_name, attr_new_val):
-    existing = field.widget.attrs.get(attr_name, '')
-    field.widget.attrs[attr_name] = f'{existing} {attr_new_val}'.strip()
-
-
-# esta função recebe um campo e uma string pare redefinir o placeholder
-# Neste caso não re reescrevemos um field, apenas adicionamos imformações a ele
-def add_placeholder(field, placeholder_val):
-    add_attr(field, 'placeholder', placeholder_val)
-
-
-# Função para validação através de validators
-def strong_password(password):
-    # aqui será checado se existem letras de a-z minusculas, letras de A-Z maiusculas, números de 1-9 e se tem no mínimo 8 caracteres # noqa
-    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
-
-    # Se a senha não corresponder aos requisitos
-    if not regex.match(password):
-
-        raise ValidationError((
-            'Sua senha deve conter '
-            'no mínimo 8 caracteres '
-            'letras maiusculas minúsculas e números'
-        ),
-            code='invalid'
-        )
+from utils import django_forms
 
 
 class RegisterForm(forms.ModelForm):
@@ -39,7 +10,7 @@ class RegisterForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Aqui é ultilizado a função para adicionar um texto ao placeholder
 
-        add_placeholder(self.fields['last_name'], 'Sobre nome')
+        django_forms.add_placeholder(self.fields['last_name'], 'Sobre nome')
 
     # Sub-escrições
     # aqui estão sendo feitas a bonescrição dos campos, ou seja é como se eles estivessem sendo refeitos e reconfigurados. É aconselhado fazer esse tipo de mudança de um só jeito para evitar bugs ou confusão de placeholder por exemplo # noqa
@@ -94,7 +65,7 @@ class RegisterForm(forms.ModelForm):
             'required': '* Este campo é obrigatório'
         },
         help_text='No mínimo 8 caracteres, Letras maiusculas minusculas e números.',
-        validators=[strong_password],
+        validators=[django_forms.strong_password],
         label='Password'
     )
 
