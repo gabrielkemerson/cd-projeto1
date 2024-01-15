@@ -15,7 +15,7 @@ def register_view(request):
     # Retorna o template de registro e as informações salvas na session no contexto # noqa
     return render(request, 'authors/pages/register_view.html', {
         'form': form,
-        'form_action': reverse('authors:create'),
+        'form_action': reverse('authors:register_create'),
     })
 
 
@@ -43,3 +43,11 @@ def register_create(request):
 
     # Aqui á view redireciona para a view a cima "register_view" e na outra view esses dados da session serão recebidos # noqa
     return redirect('authors:register')
+
+def login_view(request):
+
+    return render(request, 'authors/pages/login.html')
+
+def login_create(request):
+
+    return render(request, 'authors/pages/login.html')
