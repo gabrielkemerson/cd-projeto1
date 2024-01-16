@@ -4,3 +4,4 @@
 # Podemos importar direto from authors.forms import RegisterForm. Pois como a importação é declarada
 # neste arquivo, assim que usamos o pacote forms esta importação já virá automaticamente com ele
 from . register_form import RegisterForm
+from . login import LoginForm
