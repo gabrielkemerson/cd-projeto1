@@ -66,7 +66,7 @@ def login_create(request):
 
     # Esta linha verifica se os dados submetidos no formulário são válidos de acordo com as regras definidas no próprio formulário (LoginForm). # noqa
     if form.is_valid():
-        # Esta linha tenta autenticar o usuário utilizando a função authenticate do Django. 
+        # Esta linha tenta autenticar o usuário utilizando a função authenticate do Django. Retorna o nome de usuário # noqa 
         authenticated_user = authenticate(
             username=form.cleaned_data.get('username', ''),
             password=form.cleaned_data.get('password', ''),
@@ -74,7 +74,10 @@ def login_create(request):
 
         if authenticated_user is not None:
             messages.success(request, 'Log-in realizado com sucesso!')
-            login(authenticated_user)
+            #  A função login é utilizada para efetuar o login do usuário autenticado. Isso cria uma sessão para o usuário no servidor, permitindo que ele permaneça autenticado em requisições subsequentes. # noqa
+
+            # Além do user devemos sempre colocar o parametro "request" para que este usuário seja atrelado a requisição e seja enviado para que possamos enviar o usuário para o template, criar kookies entre outras coisas mais # noqa
+            login(request, authenticated_user)
         else:
             messages.error(request, 'Usuário ou senha inválidos!')
     else:
