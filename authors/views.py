@@ -3,6 +3,8 @@ from . forms import RegisterForm, LoginForm
 from django.http import Http404
 from django.contrib import messages
 from django.urls import reverse
+# Import usado para autenticação e login
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -23,7 +25,7 @@ def register_create(request):
     # Se o usuário tentar acessar esta view diretamento por um methodo que não seja POST isso retornará um erro 404 # noqa
     if not request.POST:
         raise Http404()
-    # Esta constante recebe os dados do formulário que foram passados na página HTML e ela foi definida como receptora desses dados na Action fo formulário da página # noqa
+    # Esta constante recebe os dados do formulário que foram passados na página HTML e ela foi definida como receptora desses dados na Action do formulário da página ou seja POST recebe os dados passados no formulário na requisição # noqa
     POST = request.POST
     # Aqui criamos uma nova chave dentro da nossa session chamada de register_form_data, e essa chave irá receber todos os dados da constante POST # noqa
     request.session['register_form_data'] = POST
@@ -55,5 +57,27 @@ def login_view(request):
 def login_create(request):
     if not request.POST:
         raise Http404()
+    
+    login_url = reverse('authors:login')
+    # Lembre-se de usar o requesr.POST sempre que quiser receber os dados do formulário # noqa
+    form = LoginForm(request.POST)
 
-    return render(request, 'authors/pages/login.html')
+    # Lembre-se de que esta parte não checa se o usuário está cadastrado, apenas checa se os dados informados nos campos são válidos # noqa
+
+    # Esta linha verifica se os dados submetidos no formulário são válidos de acordo com as regras definidas no próprio formulário (LoginForm). # noqa
+    if form.is_valid():
+        # Esta linha tenta autenticar o usuário utilizando a função authenticate do Django. 
+        authenticated_user = authenticate(
+            username=form.cleaned_data.get('username', ''),
+            password=form.cleaned_data.get('password', ''),
+        )
+
+        if authenticated_user is not None:
+            messages.success(request, 'Log-in realizado com sucesso!')
+            login(authenticated_user)
+        else:
+            messages.error(request, 'Usuário ou senha inválidos!')
+    else:
+        messages.error(request, 'Erro ao validar os dados do formulário.')
+
+    return redirect(login_url)
