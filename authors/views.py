@@ -3,8 +3,9 @@ from . forms import RegisterForm, LoginForm
 from django.http import Http404
 from django.contrib import messages
 from django.urls import reverse
-# Import usado para autenticação e login
+# Import usado para autenticação login e logout
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -85,6 +86,8 @@ def login_create(request):
 
     return redirect(login_url)
 
+@login_required(login_url='authors:login', redirect_field_name='next')
 def logout_view(request):
+    
     logout(request)
     return redirect(reverse('authors:login'))
