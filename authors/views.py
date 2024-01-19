@@ -4,7 +4,7 @@ from django.http import Http404
 from django.contrib import messages
 from django.urls import reverse
 # Import usado para autenticação e login
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -39,12 +39,12 @@ def register_create(request):
         user.set_password(user.password)
         user.save()
         # returna uma mensagem de sucesso ao salvar os dados
-        messages.success(request, 'Usuário criado com sucesso !')
+        messages.success(request, 'Usuário criado com sucesso, faça login na aplicação!')
         # deleta os dados da session
         del (request.session['register_form_data'])
 
     # Aqui á view redireciona para a view a cima "register_view" e na outra view esses dados da session serão recebidos # noqa
-    return redirect('authors:register')
+    return redirect('authors:login')
 
 def login_view(request):
     form = LoginForm()
@@ -84,3 +84,7 @@ def login_create(request):
         messages.error(request, 'Erro ao validar os dados do formulário.')
 
     return redirect(login_url)
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse('authors:login'))
