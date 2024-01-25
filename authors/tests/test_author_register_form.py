@@ -109,7 +109,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
             'no mínimo 8 caracteres '
             'letras maiusculas minúsculas e números'
         )
-        
+
         self.assertIn(msg, response.content.decode('utf-8'))
         self.assertIn(msg, response.context['form'].errors.get('password'))
 
@@ -117,7 +117,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
         self.form_data['password'] = 'AAabc123'
         response = self.client.post(url, data=self.form_data, follow=True)
-        
+
         self.assertNotIn(msg, response.content.decode('utf-8'))
         self.assertNotIn(msg, response.context['form'].errors.get('password'))
 
@@ -129,7 +129,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         response = self.client.post(url, data=self.form_data, follow=True)
 
         msg = 'As senhas são divergentes'
-        
+
         self.assertIn(msg, response.content.decode('utf-8'))
         self.assertIn(msg, response.context['form'].errors.get('password'))
 
@@ -138,7 +138,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         self.form_data['password'] = 'AAabc123'
         self.form_data['password2'] = 'AAabc123'
         response = self.client.post(url, data=self.form_data, follow=True)
-        
+
         self.assertNotIn(msg, response.content.decode('utf-8'))
 
     def test_send_get_request_to_registration_create_view_returns_404(self):
@@ -161,9 +161,9 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         url = reverse('authors:register_create')
 
         self.form_data.update({
-            'username':'testuser',
-            'password':'@Bc123456',
-            'password2':'@Bc123456',
+            'username': 'testuser',
+            'password': '@Bc123456',
+            'password2': '@Bc123456',
         })
 
         self.client.post(url, data=self.form_data, follow=True)

@@ -44,21 +44,25 @@ def register_create(request):
         # deleta os dados da session
         del (request.session['register_form_data'])
 
-    # Aqui á view redireciona para a view a cima "register_view" e na outra view esses dados da session serão recebidos # noqa
-    return redirect('authors:login')
+        return redirect('authors:login')
+    else:
+        # Aqui á view redireciona para a view a cima "register_view" e na outra view esses dados da session serão recebidos # noqa
+        return redirect('authors:register')
+
 
 def login_view(request):
     form = LoginForm()
 
-    return render(request, 'authors/pages/login.html',{
+    return render(request, 'authors/pages/login.html', {
         'form': form,
         'form_action': reverse('authors:login_create'),
     })
 
+
 def login_create(request):
     if not request.POST:
         raise Http404()
-    
+
     login_url = reverse('authors:login')
     # Lembre-se de usar o requesr.POST sempre que quiser receber os dados do formulário # noqa
     form = LoginForm(request.POST)
@@ -98,6 +102,6 @@ def logout_view(request):
     # Testa se o usuário que está enviando a requisição POST para sair é o mesmo usuário que está logado
     if request.POST.get('username') != request.user.username:
         return redirect(reverse('authors:login'))
-    
+
     logout(request)
     return redirect(reverse('authors:login'))
