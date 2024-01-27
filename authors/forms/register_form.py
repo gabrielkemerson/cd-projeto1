@@ -115,7 +115,7 @@ class RegisterForm(forms.ModelForm):
             )
         # Lembre-se de retornar o campo para que os erros do mesmo sejam exibidos nos testes # noqa
         return email
-    
+
     # Validação de campos dependentes
     def clean(self):
         # nesta variável é passado todos os valores dos campos das variáveis

@@ -121,7 +121,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         self.assertNotIn(msg, response.content.decode('utf-8'))
         self.assertNotIn(msg, response.context['form'].errors.get('password'))
 
-    def test_password_and_password_confirmation_are_equal(self):
+    def test_password_and_password2_confirmation_are_equal(self):
         url = reverse('authors:register_create')
         # Este folow é usado porque neste teste em específico a página tem que ser redirecionada para uma outra view # noqa
         self.form_data['password'] = 'AAabc123'
