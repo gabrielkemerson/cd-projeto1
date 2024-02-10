@@ -48,28 +48,28 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     font-size: 62.5%;
 }
 
-body{
+body {
     font-size: 1.6rem;
     font-family: var(--font-primary);
     background: var(--color-gray-1);
     color: var(--color-dark-text);
 }
 
-.container{
+.container {
     max-width: 144rem;
     margin: 0 auto;
     padding: var(--spacing-gutter-medium);
 }
 
-.main-header-container{
+.main-header-container {
     background: var(--color-primary-dark);
 }
 
-.main-logo{
+.main-logo {
     color: var(--color-white);
     font-size: 3rem;
     text-decoration: none;
@@ -81,15 +81,20 @@ body{
     margin: 0 auto;
 }
 
-.main-logo-icon{
+.main-logo-icon {
     margin-right: 2rem;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-headings);
 }
 
-.search-form{
+.search-form {
     border: 2px solid var(--color-dark-text);
     border-radius: .5rem;
     max-width: 64rem;
@@ -105,105 +110,106 @@ h1, h2, h3, h4, h5, h6{
     outline: none;
     padding: 1rem;
 }
-.search-button{
+
+.search-button {
     position: absolute;
     right: 0;
 }
 
-.search-input{
+.search-input {
     width: 100%;
     padding-right: 4rem;
 }
 
-.search-form:focus-within{
+.search-form:focus-within {
     border-color: var(--color-info-dark);
     background-color: white;
 }
 
-.search-form:focus-within .search-button{
+.search-form:focus-within .search-button {
     color: var(--color-info-dark);
 }
 
-.search-button:focus{
+.search-button:focus {
     outline: 2px solid var(--color-info-dark);
     background: #0000002b;
 }
 
-.main-content{
+.main-content {
     padding-top: 0;
 }
 
-.main-content-list{
+.main-content-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: var(--spacing-gutter-large);
 }
 
-.recipe{
+.recipe {
     background: var(--color-white);
-    box-shadow: -5px 5px 10px rgba(0, 0, 0, .2) ;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, .2);
     transform: scale(1);
     transition: all 300ms ease-in-out;
 }
 
-.recipe img{
+.recipe img {
     width: 100%;
 }
 
-.recipe-list-item{
-    max-width: 64rem;   
+.recipe-list-item {
+    max-width: 64rem;
     height: fit-content;
     border-radius: 5px;
     overflow: hidden;
     transition: all 300ms ease-in-out;
 }
 
-.recipe-list-item:hover{
-    
+.recipe-list-item:hover {
+
     transform: scale(1.02);
-    box-shadow: -8px 8px 18px rgba(0, 0, 0, .3) ;
+    box-shadow: -8px 8px 18px rgba(0, 0, 0, .3);
 }
 
-.recipe-title-container{
+.recipe-title-container {
     padding: var(--spacing-gutter-medium);
     padding-bottom: 2rem;
 }
 
-.recipe-title-container a{
+.recipe-title-container a {
     text-decoration: none;
-    color: var(--color-primary-dark );
+    color: var(--color-primary-dark);
 }
 
-.recipe-author{
+.recipe-author {
     padding: 0 var(--spacing-gutter-medium);
     color: var(--color-gray-4);
 }
 
-.recipe-author-item{
+.recipe-author-item {
     margin-right: 2rem;
 }
 
-.recipe-content{
+.recipe-content {
     padding: var(--spacing-gutter-medium);
     padding-top: 2rem;
 }
 
 .recipe-author a {
-        color: var(--color-primary);
-        transition: all 300ms ease-in-out;
-        text-decoration: none;
-    }
+    color: var(--color-primary);
+    transition: all 300ms ease-in-out;
+    text-decoration: none;
+}
 
 .recipe-author a:hover {
     color: var(--color-primary-dark);
 }
 
 .recipe-meta-container {
-        display: flex;
-        flex-flow: row wrap;
-        padding: var(--spacing-gutter-medium);
-        background: var(--color-gray-1);
-    }
+    display: flex;
+    flex-flow: row wrap;
+    padding: var(--spacing-gutter-medium);
+    background: var(--color-gray-1);
+}
 
 .recipe-meta {
     display: flex;
@@ -232,17 +238,17 @@ h1, h2, h3, h4, h5, h6{
 }
 
 
-.main-content-detail  .recipe-list-item {
+.main-content-detail .recipe-list-item {
     max-width: 84rem;
     margin: 0 auto;
 }
-  
+
 .main-content-detail .recipe-list-item:hover {
     transform: scale(1);
     box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.preparation-steps{
+.preparation-steps {
     padding: var(--spacing-gutter-medium);
 }
 
@@ -273,16 +279,16 @@ h1, h2, h3, h4, h5, h6{
 .preparation-steps h6,
 .preparation-steps p,
 .preparation-steps pre {
-  margin: 2rem 0;
+    margin: 2rem 0;
 }
 
 .preparation-steps ol,
 .preparation-steps ul {
-  margin: 2rem;
-  padding: 0 2rem;
+    margin: 2rem;
+    padding: 0 2rem;
 }
 
-.pagination-content{
+.pagination-content {
     display: flex;
     flex-flow: row wrap;
     gap: 1rem 0.5rem;
@@ -294,13 +300,13 @@ h1, h2, h3, h4, h5, h6{
     padding: 0.5rem 1rem;
 }
 
-.pagination .page-link{
+.pagination .page-link {
     text-decoration: none;
     background-color: var(--color-primary);
     color: var(--color-white);
 }
 
-.pagination .page-current{
+.pagination .page-current {
     background-color: var(--color-primary-dark-hover);
 }
 
@@ -309,57 +315,58 @@ h1, h2, h3, h4, h5, h6{
     max-width: 64rem;
     margin: 0 auto;
     margin-bottom: var(--spacing-gutter-medium);
-  }
-  
-  .form-content label,
-  .form-content .help-text,
-  .errorlist {
+}
+
+.form-content label,
+.form-content .help-text,
+.errorlist {
     display: block;
     margin: 0.5rem 0;
     font-size: 1.4rem;
     list-style-type: none;
-  }
-  
-  .errorlist {
+}
+
+.errorlist {
     color: var(--color-error-dark);
-  }
-  
-  .form-content input {
+}
+
+.form-content input {
     width: 100%;
     padding: 1rem;
     border-radius: 0.4rem;
     border: 1px solid var(--color-primary-dark);
-  }
-  
-  .form-content-grid {
+}
+
+.form-content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: calc(var(--spacing-gutter-medium) / 2) var(--spacing-gutter-medium);
-  }
-  
-  .form-content button {
+}
+
+.form-content button {
     padding: 1rem 2rem;
     border: none;
     background: var(--color-primary-dark);
     color: var(--color-white);
     border-radius: 5px;
-  }
+}
 
-  .plaintext-button{
+.plaintext-button {
     display: inline;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: var(--color-primary);
-  font-size: 1.6rem;
-  }
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--color-primary);
+    font-size: 1.6rem;
+}
 
-  .inline-form{
-    display:inline
-  }
+.inline-form {
+    display: inline
+}
+
 /* Messages */
 
-.messages-container{
+.messages-container {
     display: flex;
     flex-flow: column nowrap;
     gap: calc(var(--spacing-gutter-medium) / 2);
@@ -372,60 +379,60 @@ h1, h2, h3, h4, h5, h6{
     border: 1px solid var(--color-dark-text);
     background: var(--color-gray-2);
     color: var(--color-dark-text);
-  }
-  
-  .message-error {
+}
+
+.message-error {
     border: 1px solid var(--color-error-dark);
     background: var(--color-error-light);
     color: var(--color-error-dark);
-  }
-  
-  .message-success {
+}
+
+.message-success {
     border: 1px solid var(--color-success-dark);
     background: var(--color-success-light);
     color: var(--color-success-dark);
-  }
-  
-  .message-warning {
+}
+
+.message-warning {
     border: 1px solid var(--color-warning-dark);
     background: var(--color-warning-light);
     color: var(--color-warning-dark);
-  }
-  
-  .message-alert {
+}
+
+.message-alert {
     border: 1px solid var(--color-alert-dark);
     background: var(--color-alert-light);
     color: var(--color-alert-dark);
-  }
-  
-  .message-info {
+}
+
+.message-info {
     border: 1px solid var(--color-info-dark);
     background: var(--color-info-light);
     color: var(--color-info-dark);
-  }
-  
-  .message-debug {
+}
+
+.message-debug {
     border: 1px solid var(--color-debug-dark);
     background: var(--color-debug-light);
     color: var(--color-debug-dark);
-  }
-  
+}
+
 
 /*Generics*/
-.center{
+.center {
     text-align: center;
 }
 
 .m-x {
     margin: 0 var(--spacing-gutter-medium);
-  }
-  
+}
+
 .m-y {
     margin: var(--spacing-gutter-medium) 0;
-  }
+}
 
-  @media (max-width: 600px) {
+@media (max-width: 600px) {
     .main-content-list {
-      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
-  }
+}
