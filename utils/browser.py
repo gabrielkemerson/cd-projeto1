@@ -3,6 +3,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from pathlib import Path
 from time import sleep
+import os
 
 
 ROOT_PATH = Path(__file__).parent.parent
@@ -16,6 +17,9 @@ def make_chrome_browser(*options):
     if options is not None:
         for option in options:
             chrome_options.add_argument(option)
+
+    if os.environ.get('SELENIUM_READLESS') == '1':
+        chrome_options.add_argument('--headless')
 
     # Cria um objeto de serviço. Os parametros dentro dele passados são padrão
     servico = Service(ChromeDriverManager().install())
