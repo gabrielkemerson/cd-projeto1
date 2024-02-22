@@ -1,10 +1,11 @@
+from selenium.webdriver.common.by import By
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from utils.browser import make_chrome_browser
-from selenium.webdriver.common.by import By
 from time import sleep
 
 
-class RecipeBaseFuncionalTest(StaticLiveServerTestCase):
+# a classe deveria ser movida pra um arquivo separado, porém por conta de um erro ela permanecerá aqui # noqa
+class RecipeBaseFunctionalTest(StaticLiveServerTestCase):
     def sleep(self, seconds=5):
         sleep(seconds)
 
@@ -17,10 +18,9 @@ class RecipeBaseFuncionalTest(StaticLiveServerTestCase):
         return super().tearDown()
 
 
-class RecipeHomePageFunctionalTest(RecipeBaseFuncionalTest):
+class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
 
     def test_recipe_home_page_without_recipes_not_found_message(self):
         self.browser.get(self.live_server_url)
-        self.sleep()
         element = self.browser.find_element(By.XPATH, '/html/body/main/div/div') # noqa
         self.assertIn('Não temos nenhuma receita publicada 🥲', element.text)
