@@ -90,16 +90,16 @@ def login_create(request):
 
     return redirect(login_url)
 
-# Este decorator é usado para declarar que está view só pode ser acessada de o login estiver feito. No primeiro parâmetro "login_url" é passado a url para qual o usuário será redirecionado caso tente acessar esta view sem fazer login
+# Este decorator é usado para declarar que está view só pode ser acessada se o login estiver feito. No primeiro parâmetro "login_url" é passado a url para qual o usuário será redirecionado caso tente acessar esta view sem fazer login # noqa
 
-# O segundo parâmetro indica o nome do campo que será usado para armazenar a URL à qual o usuário será redirecionado após o login bem-sucedido.
+# O segundo parâmetro indica o nome do campo que será usado para armazenar a URL à qual o usuário será redirecionado após o login bem-sucedido. # noqa
 @login_required(login_url='authors:login', redirect_field_name='next')
 def logout_view(request):
 
     if not request.POST:
-        # Caso o usuário tente acessar o logout pela url ele retornará para a mesma página, pois como ele está logado continuará logado e na mesma página
+        # Caso o usuário tente acessar o logout pela url ele retornará para a mesma página, pois como ele está logado continuará logado e na mesma página # noqa
         return redirect(reverse('authors:login'))
-    # Testa se o usuário que está enviando a requisição POST para sair é o mesmo usuário que está logado
+    # Testa se o usuário que está enviando a requisição POST para sair é o mesmo usuário que está logado # noqa
     if request.POST.get('username') != request.user.username:
         return redirect(reverse('authors:login'))
 
