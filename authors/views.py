@@ -7,8 +7,6 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
 
 def register_view(request):
     # Recebe o formulário que foi armazenado na session caso não exista nada receberá o None retornado # noqa
@@ -34,13 +32,13 @@ def register_create(request):
     # validação para salvar dados na base de dados
     # se o formulário for válido
     if form.is_valid():
-        # as informações do formulário serão salvas na base de dados (se tiver sem o commit=False)
+        # as informações do formulário serão salvas na base de dados (se tiver sem o commit=False) # noqa
         user = form.save(commit=False)
-        # Aqui está sendo configurado o campo de senha para ser criptografado e salvo na base de dados
+        # Aqui está sendo configurado o campo de senha para ser criptografado e salvo na base de dados # noqa
         user.set_password(user.password)
         user.save()
         # returna uma mensagem de sucesso ao salvar os dados
-        messages.success(request, 'Usuário criado com sucesso, faça login na aplicação!')
+        messages.success(request, 'Usuário criado com sucesso, faça login na aplicação!') # noqa
         # deleta os dados da session
         del (request.session['register_form_data'])
 
@@ -81,7 +79,7 @@ def login_create(request):
             messages.success(request, 'Log-in realizado com sucesso!')
             #  A função login é utilizada para efetuar o login do usuário autenticado. Isso cria uma sessão para o usuário no servidor, permitindo que ele permaneça autenticado em requisições subsequentes. # noqa
 
-            # Além do user devemos sempre colocar o parametro "request" para que este usuário seja atrelado a requisição e seja enviado para que possamos enviar o usuário para o template, criar kookies entre outras coisas mais # noqa
+            # Além do user devemos sempre colocar o parametro "request" para que este usuário seja atrelado a requisição e seja enviado para que possamos enviar o usuário para o template, criar kookies, para que este usuário seja utilisado em outras views entre outras coisas mais # noqa
             login(request, authenticated_user)
         else:
             messages.error(request, 'Usuário ou senha inválidos!')
@@ -93,7 +91,7 @@ def login_create(request):
 # Este decorator é usado para declarar que está view só pode ser acessada se o login estiver feito. No primeiro parâmetro "login_url" é passado a url para qual o usuário será redirecionado caso tente acessar esta view sem fazer login # noqa
 
 # O segundo parâmetro indica o nome do campo que será usado para armazenar a URL à qual o usuário será redirecionado após o login bem-sucedido. # noqa
-@login_required(login_url='authors:login', redirect_field_name='next')
+@login_required(login_url='authors:login', redirect_field_name='next') # noqa
 def logout_view(request):
 
     if not request.POST:
